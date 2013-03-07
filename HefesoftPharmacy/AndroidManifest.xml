@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hefesoftpharmacy"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <permission
+        android:name="com.hefesoftpharmacy.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    
+    <uses-permission 
+      android:name="android.permission.READ_CALENDAR"/>
+	
+	<uses-permission 
+      android:name="android.permission.WRITE_CALENDAR"/>
+    
+
+    <uses-permission android:name="com.hefesoftpharmacy.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name="com.hefesoftpharmacy.GlobalVars"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDJ8vOz8w-s9EvuvgCnKpcTbompzAcZdSo" />
+
+        <activity
+            android:name="com.hefesoftpharmacy.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="@string/app_name"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.hefesoftpharmacy.parametrizacion.Medicos"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="Medicos" >
+        </activity>
+        <activity
+            android:name="com.hefesoft.pharmacy.localizacion.Mapa"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="Mapas" >
+        </activity>
+        <activity
+            android:name="com.hefesoftpharmacy.menu.MenuParametrizacion"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="Menu" >
+        </activity>
+        <activity
+            android:name="com.hefesoftpharmacy.splash.Splash"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hefesoftpharmacy.panel.PlanearVisita"
+            android:label="@string/title_activity_planear_visita" >
+        </activity>
+    </application>
+
+</manifest>
