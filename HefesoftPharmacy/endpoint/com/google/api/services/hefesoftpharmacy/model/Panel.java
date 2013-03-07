@@ -81,6 +81,12 @@ public final class Panel extends GenericJson {
   /**
    * The value may be {@code null}.
    */
+  @com.google.api.client.util.Key @JsonString
+  private Long comodin;
+
+  /**
+   * The value may be {@code null}.
+   */
   @com.google.api.client.util.Key
   private Integer contactosActual;
 
@@ -266,6 +272,23 @@ public final class Panel extends GenericJson {
    */
   public Panel setCicloEntity(Ciclo cicloEntity) {
     this.cicloEntity = cicloEntity;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Long getComodin() {
+    return comodin;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public Panel setComodin(Long comodin) {
+    this.comodin = comodin;
     return this;
   }
 

@@ -68,12 +68,6 @@ public final class VisitaRealizada extends GenericJson {
   private Key panel;
 
   /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private Panel panelEntity;
-
-  /**
 
    * The value returned may be {@code null}.
    */
@@ -155,23 +149,6 @@ public final class VisitaRealizada extends GenericJson {
    */
   public VisitaRealizada setPanel(Key panel) {
     this.panel = panel;
-    return this;
-  }
-
-  /**
-
-   * The value returned may be {@code null}.
-   */
-  public Panel getPanelEntity() {
-    return panelEntity;
-  }
-
-  /**
-
-   * The value set may be {@code null}.
-   */
-  public VisitaRealizada setPanelEntity(Panel panelEntity) {
-    this.panelEntity = panelEntity;
     return this;
   }
 

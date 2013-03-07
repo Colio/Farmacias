@@ -35,6 +35,12 @@
                 />
             
             <TextView
+                android:id="@+id/template_panel_contactos"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"                                
+                />
+            
+            <TextView
                 android:id="@+id/template_panel_telefonos"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"                                

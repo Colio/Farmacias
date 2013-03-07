@@ -22,10 +22,11 @@ public class AdaptadorPanel extends ArrayAdapter<Object>
 	
 	public
     AdaptadorPanel(Activity context, List<Panel> datos ) 
-    {	
+    {
 		super(context, R.layout.activity_lista_seleccion,datos.toArray());
     	this.context = context;
     	this.datos = datos;
+		
     }
 
     public View getView(int position, View convertView, ViewGroup parent) 
@@ -37,7 +38,11 @@ public class AdaptadorPanel extends ArrayAdapter<Object>
         TextView Telefonos = (TextView)item.findViewById(R.id.template_panel_telefonos);
         TextView Email = (TextView)item.findViewById(R.id.template_panel_email);
         TextView Direccion = (TextView)item.findViewById(R.id.template_panel_direccion);
+        TextView Contactos = (TextView)item.findViewById(R.id.template_panel_contactos);
+        
         ImageView Imagen = (ImageView)item.findViewById(R.id.template_panel_imagen);
+        
+        
         
         Panel panel = (Panel)datos.toArray()[position];
         
@@ -49,6 +54,7 @@ public class AdaptadorPanel extends ArrayAdapter<Object>
         	Telefonos.setText(medico.getTelefono());
         	Email.setText(medico.getEmail());
         	Direccion.setText(medico.getDireccion());
+        	Contactos.setText("Contactos " + panel.getContactosOriginal());
         	
         	int loader = R.drawable.ic_launcher;
             ImageLoader imgLoader = new ImageLoader(context.getApplicationContext());
@@ -62,14 +68,12 @@ public class AdaptadorPanel extends ArrayAdapter<Object>
         	Nombres.setText(farmacias.getNombre());        	
         	Email.setText(farmacias.getEmail());
         	Direccion.setText(farmacias.getDireccion());
+        	Contactos.setText("Contactos " + panel.getContactosOriginal());
         	
         	int loader = R.drawable.ic_launcher;
             ImageLoader imgLoader = new ImageLoader(context.getApplicationContext());
             imgLoader.DisplayImage(farmacias.getImagen(), loader, Imagen);
         }
-                	
-        
-        
         
         return(item);
     }

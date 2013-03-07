@@ -11,5 +11,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_planear_visita">PlanearVisita</string>
+    <string name="menu_Eliminar">Eliminar</string>
+    <string name="menu_cambiar_fecha">Cambiar fecha</string>
 
 </resources>
