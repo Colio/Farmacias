@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuItem;
+
 import com.hefesoftpharmacy.R;
 import com.hefesoftpharmacy.util.SectionsPagerAdapter;
 
@@ -71,7 +73,8 @@ public class PlanearVisita extends FragmentActivity implements ActionBar.TabList
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_planear_visita, menu);
 		return true;
-	}
+	}	
+	
 
 	@Override
 	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {

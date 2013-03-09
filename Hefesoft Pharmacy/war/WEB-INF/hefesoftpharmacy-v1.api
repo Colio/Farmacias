@@ -24,6 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "hefesoftpharmacy.panel.actualizarPanel" : {
+      "path" : "panel",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.updatePanel",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "hefesoftpharmacy.visitas.planeacion.listar" : {
       "path" : "visitaplaneada",
       "httpMethod" : "GET",
@@ -43,21 +58,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "hefesoftpharmacy.panel.actualizarPanel" : {
-      "path" : "panel",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.updatePanel",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -108,6 +108,30 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "hefesoftpharmacy.usuarios.obtenerUsuarioPorEmailContrasenia" : {
+      "path" : "usuario/{Email}/{Password}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.getUsuarioEmailPassword",
+      "request" : {
+        "parameters" : {
+          "Email" : {
+            "type" : "string",
+            "required" : true
+          },
+          "Password" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "hefesoftpharmacy.unidadVisita.listar" : {
       "path" : "unidadvisita",
       "httpMethod" : "GET",
@@ -128,30 +152,6 @@
           "limit" : {
             "type" : "int32",
             "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "hefesoftpharmacy.usuarios.obtenerUsuarioPorEmailContrasenia" : {
-      "path" : "usuario/{Email}/{Password}",
-      "httpMethod" : "GET",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.getUsuarioEmailPassword",
-      "request" : {
-        "parameters" : {
-          "Email" : {
-            "type" : "string",
-            "required" : true
-          },
-          "Password" : {
-            "type" : "string",
-            "required" : true
           }
         },
         "body" : "empty"
@@ -219,26 +219,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.usuarios.eliminarUsuario" : {
-      "path" : "usuario/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.removeUsuario",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hefesoftpharmacy.medicos.eliminarMedico" : {
       "path" : "medicos/{id}",
       "httpMethod" : "DELETE",
@@ -250,6 +230,26 @@
         "parameters" : {
           "id" : {
             "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hefesoftpharmacy.usuarios.eliminarUsuario" : {
+      "path" : "usuario/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.removeUsuario",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
             "required" : true
           }
         },
@@ -347,20 +347,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.farmacias.listarFarmacias" : {
-      "path" : "farmacias",
-      "httpMethod" : "GET",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.listFarmacias",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hefesoftpharmacy.ciclo.adicionarCiclo" : {
       "path" : "ciclo",
       "httpMethod" : "POST",
@@ -371,6 +357,20 @@
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hefesoftpharmacy.farmacias.listarFarmacias" : {
+      "path" : "farmacias",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.listFarmacias",
+      "request" : {
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -523,6 +523,26 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "hefesoftpharmacy.visitas.planeacion.eliminar" : {
+      "path" : "visitaplaneada/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.removeVisitaPlaneada",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "hefesoftpharmacy.gerentes.regional.listarGerentes" : {
       "path" : "gerenteregional",
       "httpMethod" : "GET",
@@ -543,26 +563,6 @@
           "limit" : {
             "type" : "int32",
             "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "hefesoftpharmacy.visitas.planeacion.eliminar" : {
-      "path" : "visitaplaneada/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.removeVisitaPlaneada",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
           }
         },
         "body" : "empty"
@@ -740,21 +740,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.pais.actualizarPais" : {
-      "path" : "pais",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.updatePais",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hefesoftpharmacy.medicos.obtenerMedicoPorId" : {
       "path" : "medicos/{id}",
       "httpMethod" : "GET",
@@ -770,6 +755,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hefesoftpharmacy.pais.actualizarPais" : {
+      "path" : "pais",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.updatePais",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -837,13 +837,13 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.gerentes.linea.actualizarGerente" : {
-      "path" : "gerentelinea",
-      "httpMethod" : "PUT",
+    "hefesoftpharmacy.gerentes.pais.adicionarGerente" : {
+      "path" : "gerentepais",
+      "httpMethod" : "POST",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.updateGerenteLinea",
+      "rosyMethod" : "Hefesoftrest.insertGerentePais",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -867,13 +867,13 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.gerentes.pais.adicionarGerente" : {
-      "path" : "gerentepais",
-      "httpMethod" : "POST",
+    "hefesoftpharmacy.gerentes.linea.actualizarGerente" : {
+      "path" : "gerentelinea",
+      "httpMethod" : "PUT",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.insertGerentePais",
+      "rosyMethod" : "Hefesoftrest.updateGerenteLinea",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -1083,6 +1083,21 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "hefesoftpharmacy.unidadVisita.actualizarUnidadVisita" : {
+      "path" : "unidadvisita",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.updateUnidadVisita",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "hefesoftpharmacy.gerentes.pais.eliminarGerente" : {
       "path" : "gerentepais/{id}",
       "httpMethod" : "DELETE",
@@ -1098,21 +1113,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "hefesoftpharmacy.unidadVisita.actualizarUnidadVisita" : {
-      "path" : "unidadvisita",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.updateUnidadVisita",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -1138,21 +1138,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.gerentes.division.actualizarGerente" : {
-      "path" : "gerentedivision",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.updateGerenteDivision",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hefesoftpharmacy.visitas.realizada.eliminar" : {
       "path" : "visitarealizada/{id}",
       "httpMethod" : "DELETE",
@@ -1168,6 +1153,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hefesoftpharmacy.gerentes.division.actualizarGerente" : {
+      "path" : "gerentedivision",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.updateGerenteDivision",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -1535,15 +1535,19 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.gerentes.cluster.listarGerentes" : {
-      "path" : "gerentecluster",
+    "hefesoftpharmacy.usuarios.listarUsuarios" : {
+      "path" : "usuario",
       "httpMethod" : "GET",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.listGerenteCluster",
+      "rosyMethod" : "Hefesoftrest.listUsuario",
       "request" : {
         "parameters" : {
+          "dependencias" : {
+            "type" : "boolean",
+            "required" : false
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -1559,19 +1563,15 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.usuarios.listarUsuarios" : {
-      "path" : "usuario",
+    "hefesoftpharmacy.gerentes.cluster.listarGerentes" : {
+      "path" : "gerentecluster",
       "httpMethod" : "GET",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.listUsuario",
+      "rosyMethod" : "Hefesoftrest.listGerenteCluster",
       "request" : {
         "parameters" : {
-          "dependencias" : {
-            "type" : "boolean",
-            "required" : false
-          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -1942,21 +1942,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "hefesoftpharmacy.gerentes.division.adicionarGerente" : {
-      "path" : "gerentedivision",
-      "httpMethod" : "POST",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "Hefesoftrest.insertGerenteDivision",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "hefesoftpharmacy.pais.eliminarPais" : {
       "path" : "pais/{id}",
       "httpMethod" : "DELETE",
@@ -1972,6 +1957,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "hefesoftpharmacy.gerentes.division.adicionarGerente" : {
+      "path" : "gerentedivision",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "Hefesoftrest.insertGerenteDivision",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -2020,51 +2020,74 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_VisitaPlaneada" : {
-        "id" : "CollectionResponse_VisitaPlaneada",
+      "Panel" : {
+        "id" : "Panel",
         "type" : "object",
         "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "VisitaPlaneada"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
-      "VisitaPlaneada" : {
-        "id" : "VisitaPlaneada",
-        "type" : "object",
-        "properties" : {
-          "idPanel" : {
+          "idUnidadVisita" : {
             "type" : "string",
             "format" : "int64"
           },
-          "idGeneradoCalendario" : {
+          "idCiclo" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "idUsuario" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "idEntidad" : {
             "type" : "string",
             "format" : "int64"
           },
           "id" : {
             "$ref" : "Key"
           },
+          "cicloEntity" : {
+            "$ref" : "Ciclo"
+          },
+          "contactosActual" : {
+            "type" : "integer"
+          },
+          "contactosOriginal" : {
+            "type" : "integer"
+          },
+          "contactosNuevo" : {
+            "type" : "integer"
+          },
+          "unidadVisita" : {
+            "$ref" : "Key"
+          },
           "email" : {
             "type" : "string"
           },
-          "fechaYHora" : {
-            "type" : "string",
-            "format" : "date-time"
+          "ciclo" : {
+            "$ref" : "Key"
           },
-          "cordenadas" : {
+          "usuario" : {
+            "$ref" : "Key"
+          },
+          "unidadVisitaEntity" : {
+            "$ref" : "UnidadVisita"
+          },
+          "comodin" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "baja" : {
+            "type" : "boolean"
+          },
+          "aprobado" : {
+            "type" : "integer"
+          },
+          "categoria" : {
             "type" : "string"
           },
-          "panelEntity" : {
-            "$ref" : "Panel"
+          "alta" : {
+            "type" : "boolean"
           },
-          "panel" : {
-            "$ref" : "Key"
+          "activo" : {
+            "type" : "boolean"
           }
         }
       },
@@ -2096,77 +2119,6 @@
           }
         }
       },
-      "Panel" : {
-        "id" : "Panel",
-        "type" : "object",
-        "properties" : {
-          "idUnidadVisita" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "idCiclo" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "idUsuario" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "idEntidad" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "id" : {
-            "$ref" : "Key"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "alta" : {
-            "type" : "boolean"
-          },
-          "aprobado" : {
-            "type" : "integer"
-          },
-          "categoria" : {
-            "type" : "string"
-          },
-          "comodin" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "baja" : {
-            "type" : "boolean"
-          },
-          "ciclo" : {
-            "$ref" : "Key"
-          },
-          "activo" : {
-            "type" : "boolean"
-          },
-          "usuario" : {
-            "$ref" : "Key"
-          },
-          "unidadVisita" : {
-            "$ref" : "Key"
-          },
-          "cicloEntity" : {
-            "$ref" : "Ciclo"
-          },
-          "contactosOriginal" : {
-            "type" : "integer"
-          },
-          "contactosNuevo" : {
-            "type" : "integer"
-          },
-          "contactosActual" : {
-            "type" : "integer"
-          },
-          "unidadVisitaEntity" : {
-            "$ref" : "UnidadVisita"
-          }
-        }
-      },
       "Ciclo" : {
         "id" : "Ciclo",
         "type" : "object",
@@ -2174,31 +2126,31 @@
           "id" : {
             "$ref" : "Key"
           },
-          "idUPES" : {
-            "type" : "string"
+          "fechaInicial" : {
+            "type" : "string",
+            "format" : "date-time"
           },
-          "nombre" : {
-            "type" : "string"
+          "diasHabiles" : {
+            "type" : "integer"
+          },
+          "diasReunionCiclo" : {
+            "type" : "integer"
           },
           "fechaReunionCiclo" : {
             "type" : "string",
             "format" : "date-time"
           },
-          "diasReunionCiclo" : {
+          "plazoRegistrarPedido" : {
             "type" : "integer"
-          },
-          "diasHabiles" : {
-            "type" : "integer"
-          },
-          "fechaInicial" : {
-            "type" : "string",
-            "format" : "date-time"
           },
           "plazoReportarVisita" : {
             "type" : "integer"
           },
-          "plazoRegistrarPedido" : {
-            "type" : "integer"
+          "idUPES" : {
+            "type" : "string"
+          },
+          "nombre" : {
+            "type" : "string"
           }
         }
       },
@@ -2222,11 +2174,11 @@
           "unidadVisita" : {
             "$ref" : "Key"
           },
-          "farmaciasEntity" : {
-            "$ref" : "Farmacias"
-          },
           "medicosEntity" : {
             "$ref" : "Medicos"
+          },
+          "farmaciasEntity" : {
+            "$ref" : "Farmacias"
           }
         }
       },
@@ -2242,33 +2194,6 @@
           }
         }
       },
-      "Farmacias" : {
-        "id" : "Farmacias",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "$ref" : "Key"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "nombre" : {
-            "type" : "string"
-          },
-          "direccion" : {
-            "type" : "string"
-          },
-          "imagen" : {
-            "type" : "string"
-          },
-          "cordenadas" : {
-            "type" : "string"
-          },
-          "pagina_Web" : {
-            "type" : "string"
-          }
-        }
-      },
       "Medicos" : {
         "id" : "Medicos",
         "type" : "object",
@@ -2280,10 +2205,16 @@
           "id" : {
             "$ref" : "Key"
           },
+          "cordenadas" : {
+            "type" : "string"
+          },
+          "telefono_Celular" : {
+            "type" : "string"
+          },
           "email" : {
             "type" : "string"
           },
-          "imagenUrl" : {
+          "telefono" : {
             "type" : "string"
           },
           "direccion" : {
@@ -2292,20 +2223,89 @@
           "cedula" : {
             "type" : "string"
           },
-          "cordenadas" : {
-            "type" : "string"
-          },
-          "telefono_Celular" : {
-            "type" : "string"
-          },
-          "nombres" : {
+          "imagenUrl" : {
             "type" : "string"
           },
           "apellidos" : {
             "type" : "string"
           },
-          "telefono" : {
+          "nombres" : {
             "type" : "string"
+          }
+        }
+      },
+      "Farmacias" : {
+        "id" : "Farmacias",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "$ref" : "Key"
+          },
+          "cordenadas" : {
+            "type" : "string"
+          },
+          "pagina_Web" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "imagen" : {
+            "type" : "string"
+          },
+          "direccion" : {
+            "type" : "string"
+          },
+          "nombre" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_VisitaPlaneada" : {
+        "id" : "CollectionResponse_VisitaPlaneada",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "VisitaPlaneada"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "VisitaPlaneada" : {
+        "id" : "VisitaPlaneada",
+        "type" : "object",
+        "properties" : {
+          "idPanel" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "idGeneradoCalendario" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "id" : {
+            "$ref" : "Key"
+          },
+          "cordenadas" : {
+            "type" : "string"
+          },
+          "panelEntity" : {
+            "$ref" : "Panel"
+          },
+          "fechaYHora" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "panel" : {
+            "$ref" : "Key"
           }
         }
       },
@@ -2382,20 +2382,20 @@
           "password" : {
             "type" : "string"
           },
-          "email" : {
-            "type" : "string"
-          },
           "telefonoCelular" : {
             "type" : "string"
-          },
-          "gerentePaisEntity" : {
-            "$ref" : "GerentePais"
           },
           "lineasEntitys" : {
             "type" : "array",
             "items" : {
               "$ref" : "Linea"
             }
+          },
+          "gerentePaisEntity" : {
+            "$ref" : "GerentePais"
+          },
+          "email" : {
+            "type" : "string"
           },
           "gerenteDistritoEntity" : {
             "$ref" : "GerenteDistrito"
@@ -2409,36 +2409,20 @@
           "gerenteRegionalEntity" : {
             "$ref" : "GerenteRegional"
           },
-          "gerenteClusterEntity" : {
-            "$ref" : "GerenteCluster"
-          },
           "gerenteLineaEntity" : {
             "$ref" : "GerenteLinea"
           },
-          "nombres" : {
+          "gerenteClusterEntity" : {
+            "$ref" : "GerenteCluster"
+          },
+          "telefono" : {
             "type" : "string"
           },
           "apellidos" : {
             "type" : "string"
           },
-          "telefono" : {
+          "nombres" : {
             "type" : "string"
-          }
-        }
-      },
-      "GerentePais" : {
-        "id" : "GerentePais",
-        "type" : "object",
-        "properties" : {
-          "idUsuario" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "id" : {
-            "$ref" : "Key"
-          },
-          "usuarioEntity" : {
-            "$ref" : "Usuario"
           }
         }
       },
@@ -2458,6 +2442,22 @@
           },
           "descripcion" : {
             "type" : "string"
+          }
+        }
+      },
+      "GerentePais" : {
+        "id" : "GerentePais",
+        "type" : "object",
+        "properties" : {
+          "idUsuario" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "id" : {
+            "$ref" : "Key"
+          },
+          "usuarioEntity" : {
+            "$ref" : "Usuario"
           }
         }
       },
@@ -2509,8 +2509,8 @@
           }
         }
       },
-      "GerenteCluster" : {
-        "id" : "GerenteCluster",
+      "GerenteLinea" : {
+        "id" : "GerenteLinea",
         "type" : "object",
         "properties" : {
           "idUsuario" : {
@@ -2525,8 +2525,8 @@
           }
         }
       },
-      "GerenteLinea" : {
-        "id" : "GerenteLinea",
+      "GerenteCluster" : {
+        "id" : "GerenteCluster",
         "type" : "object",
         "properties" : {
           "idUsuario" : {
@@ -2678,12 +2678,12 @@
           "id" : {
             "$ref" : "Key"
           },
-          "email" : {
-            "type" : "string"
-          },
           "fechaYHora" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "email" : {
+            "type" : "string"
           },
           "panel" : {
             "$ref" : "Key"
@@ -2840,21 +2840,6 @@
           }
         }
       },
-      "CollectionResponse_GerenteCluster" : {
-        "id" : "CollectionResponse_GerenteCluster",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "GerenteCluster"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "CollectionResponse_Usuario" : {
         "id" : "CollectionResponse_Usuario",
         "type" : "object",
@@ -2863,6 +2848,21 @@
             "type" : "array",
             "items" : {
               "$ref" : "Usuario"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_GerenteCluster" : {
+        "id" : "CollectionResponse_GerenteCluster",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "GerenteCluster"
             }
           },
           "nextPageToken" : {
@@ -2902,17 +2902,17 @@
       }
     },
     "methods" : {
-      "Hefesoftrest.listVisitaPlaneada" : {
-        "response" : {
-          "$ref" : "CollectionResponse_VisitaPlaneada"
-        }
-      },
       "Hefesoftrest.updatePanel" : {
         "request" : {
           "$ref" : "Panel"
         },
         "response" : {
           "$ref" : "Panel"
+        }
+      },
+      "Hefesoftrest.listVisitaPlaneada" : {
+        "response" : {
+          "$ref" : "CollectionResponse_VisitaPlaneada"
         }
       },
       "Hefesoftrest.updateVisitaPlaneada" : {
@@ -2939,14 +2939,14 @@
           "$ref" : "GerenteDistrito"
         }
       },
-      "Hefesoftrest.listUnidadVisita" : {
-        "response" : {
-          "$ref" : "CollectionResponse_UnidadVisita"
-        }
-      },
       "Hefesoftrest.getUsuarioEmailPassword" : {
         "response" : {
           "$ref" : "Usuario"
+        }
+      },
+      "Hefesoftrest.listUnidadVisita" : {
+        "response" : {
+          "$ref" : "CollectionResponse_UnidadVisita"
         }
       },
       "Hefesoftrest.listLinea" : {
@@ -2967,14 +2967,14 @@
           "$ref" : "UnidadVisita"
         }
       },
-      "Hefesoftrest.removeUsuario" : {
-        "response" : {
-          "$ref" : "Usuario"
-        }
-      },
       "Hefesoftrest.removeMedicos" : {
         "response" : {
           "$ref" : "Medicos"
+        }
+      },
+      "Hefesoftrest.removeUsuario" : {
+        "response" : {
+          "$ref" : "Usuario"
         }
       },
       "Hefesoftrest.insertProductos" : {
@@ -3019,17 +3019,17 @@
           "$ref" : "Linea"
         }
       },
-      "Hefesoftrest.listFarmacias" : {
-        "response" : {
-          "$ref" : "FarmaciasCollection"
-        }
-      },
       "Hefesoftrest.insertCiclo" : {
         "request" : {
           "$ref" : "Ciclo"
         },
         "response" : {
           "$ref" : "Ciclo"
+        }
+      },
+      "Hefesoftrest.listFarmacias" : {
+        "response" : {
+          "$ref" : "FarmaciasCollection"
         }
       },
       "Hefesoftrest.insertFarmacias" : {
@@ -3087,14 +3087,14 @@
           "$ref" : "Usuario"
         }
       },
-      "Hefesoftrest.listGerenteRegional" : {
-        "response" : {
-          "$ref" : "CollectionResponse_GerenteRegional"
-        }
-      },
       "Hefesoftrest.removeVisitaPlaneada" : {
         "response" : {
           "$ref" : "VisitaPlaneada"
+        }
+      },
+      "Hefesoftrest.listGerenteRegional" : {
+        "response" : {
+          "$ref" : "CollectionResponse_GerenteRegional"
         }
       },
       "Hefesoftrest.insertGerenteEmpresa" : {
@@ -3146,17 +3146,17 @@
           "$ref" : "GerenteRegional"
         }
       },
+      "Hefesoftrest.getMedicos" : {
+        "response" : {
+          "$ref" : "Medicos"
+        }
+      },
       "Hefesoftrest.updatePais" : {
         "request" : {
           "$ref" : "Pais"
         },
         "response" : {
           "$ref" : "Pais"
-        }
-      },
-      "Hefesoftrest.getMedicos" : {
-        "response" : {
-          "$ref" : "Medicos"
         }
       },
       "Hefesoftrest.listActividadjustificada" : {
@@ -3174,12 +3174,12 @@
           "$ref" : "CollectionResponse_Pais"
         }
       },
-      "Hefesoftrest.updateGerenteLinea" : {
+      "Hefesoftrest.insertGerentePais" : {
         "request" : {
-          "$ref" : "GerenteLinea"
+          "$ref" : "GerentePais"
         },
         "response" : {
-          "$ref" : "GerenteLinea"
+          "$ref" : "GerentePais"
         }
       },
       "Hefesoftrest.insertGerenteLinea" : {
@@ -3190,12 +3190,12 @@
           "$ref" : "GerenteLinea"
         }
       },
-      "Hefesoftrest.insertGerentePais" : {
+      "Hefesoftrest.updateGerenteLinea" : {
         "request" : {
-          "$ref" : "GerentePais"
+          "$ref" : "GerenteLinea"
         },
         "response" : {
-          "$ref" : "GerentePais"
+          "$ref" : "GerenteLinea"
         }
       },
       "Hefesoftrest.FileHefesoftProperties" : {
@@ -3257,11 +3257,6 @@
           "$ref" : "GerenteDivision"
         }
       },
-      "Hefesoftrest.removeGerentePais" : {
-        "response" : {
-          "$ref" : "GerentePais"
-        }
-      },
       "Hefesoftrest.updateUnidadVisita" : {
         "request" : {
           "$ref" : "UnidadVisita"
@@ -3270,9 +3265,19 @@
           "$ref" : "UnidadVisita"
         }
       },
+      "Hefesoftrest.removeGerentePais" : {
+        "response" : {
+          "$ref" : "GerentePais"
+        }
+      },
       "Hefesoftrest.removeLinea" : {
         "response" : {
           "$ref" : "Linea"
+        }
+      },
+      "Hefesoftrest.removeVisitaRealizada" : {
+        "response" : {
+          "$ref" : "VisitaRealizada"
         }
       },
       "Hefesoftrest.updateGerenteDivision" : {
@@ -3281,11 +3286,6 @@
         },
         "response" : {
           "$ref" : "GerenteDivision"
-        }
-      },
-      "Hefesoftrest.removeVisitaRealizada" : {
-        "response" : {
-          "$ref" : "VisitaRealizada"
         }
       },
       "Hefesoftrest.insertVisitaPlaneada" : {
@@ -3390,14 +3390,14 @@
           "$ref" : "GerenteLinea"
         }
       },
-      "Hefesoftrest.listGerenteCluster" : {
-        "response" : {
-          "$ref" : "CollectionResponse_GerenteCluster"
-        }
-      },
       "Hefesoftrest.listUsuario" : {
         "response" : {
           "$ref" : "CollectionResponse_Usuario"
+        }
+      },
+      "Hefesoftrest.listGerenteCluster" : {
+        "response" : {
+          "$ref" : "CollectionResponse_GerenteCluster"
         }
       },
       "Hefesoftrest.removeGerenteRegional" : {
@@ -3522,17 +3522,17 @@
           "$ref" : "CollectionResponse_GerenteDivision"
         }
       },
+      "Hefesoftrest.removePais" : {
+        "response" : {
+          "$ref" : "Pais"
+        }
+      },
       "Hefesoftrest.insertGerenteDivision" : {
         "request" : {
           "$ref" : "GerenteDivision"
         },
         "response" : {
           "$ref" : "GerenteDivision"
-        }
-      },
-      "Hefesoftrest.removePais" : {
-        "response" : {
-          "$ref" : "Pais"
         }
       },
       "Hefesoftrest.getVisitaRealizada" : {

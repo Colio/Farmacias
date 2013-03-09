@@ -14,6 +14,8 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +39,7 @@ import android.widget.Toast;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.hefesoftpharmacy.model.Panel;
 import com.google.api.services.hefesoftpharmacy.model.VisitaPlaneada;
+import com.hefesoft.pharmacy.localizacion.Mapa;
 import com.hefesoftpharmacy.GlobalVars;
 import com.hefesoftpharmacy.R;
 import com.hefesoftpharmacy.AsyncTask.AsyncTaskCompleteListener;
@@ -46,6 +49,7 @@ import com.hefesoftpharmacy.AsyncTask.Listar_Panel_Async;
 import com.hefesoftpharmacy.AsyncTask.Listar_Visitas_Planeadas_Async;
 import com.hefesoftpharmacy.interaction.Interface_Interacion;
 import com.hefesoftpharmacy.interaction.MyDragEventListener;
+import com.hefesoftpharmacy.util.CalendarsHandler;
 
 public class Fragment_listado_panel extends Fragment {
 
@@ -53,6 +57,9 @@ public class Fragment_listado_panel extends Fragment {
 	Calendar dateAndTime=Calendar.getInstance();
 	private View view;
 	MyDragEventListener myDragEventListener;
+	private int global_year;
+	private int global_monthOfYear;
+	private int global_dayOfMonth;
 	private ListView listaPanel, listTarget;
 	private com.hefesoftpharmacy.adaptadores.AdaptadorPanel AdaptadorPanel;
 	private com.hefesoftpharmacy.adaptadores.AdaptadorPanel AdaptadorPanelTarget;
@@ -67,16 +74,13 @@ public class Fragment_listado_panel extends Fragment {
 	private com.google.api.services.hefesoftpharmacy.model.Panel PanelSeleccionadoTarget;
 	Boolean Guardando = false;
 	
-	
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
 		view = inflater.inflate(com.hefesoftpharmacy.R.layout.activity_lista_seleccion_drag_drop, container, false);
 		
-//		long result = CalendarsHandler.addEvent(2013,3,3,0,"Otra cosa","Descripcion de prueba","jose douglas", "Casa" ,Color.YELLOW);
-//		CalendarsHandler.showCalendar(result);
+		setHasOptionsMenu(true);
 		
 		targetLayout = (LinearLayout)view.findViewById(R.id.targetlayout);
 		
@@ -96,9 +100,14 @@ public class Fragment_listado_panel extends Fragment {
 			listarMedicos.execute(this);
 			
 			Listar_Visitas_Planeadas_Async visitasPlaneadas = new Listar_Visitas_Planeadas_Async(activity, visitasPlaneadasCargadas);
-			visitasPlaneadas.year = 2013;
-			visitasPlaneadas.month = 3-1;
-			visitasPlaneadas.day = 6;
+			
+			global_year = dateAndTime.get(Calendar.YEAR);
+			global_monthOfYear = dateAndTime.get(Calendar.MONTH);
+			global_dayOfMonth = dateAndTime.get(Calendar.DAY_OF_MONTH);
+			
+			visitasPlaneadas.year = dateAndTime.get(Calendar.YEAR);
+			visitasPlaneadas.month = dateAndTime.get(Calendar.MONTH);
+			visitasPlaneadas.day = dateAndTime.get(Calendar.DAY_OF_MONTH);
 			visitasPlaneadas.dependencias = true;
 			visitasPlaneadas.execute(this);
 			
@@ -116,12 +125,41 @@ public class Fragment_listado_panel extends Fragment {
 		
 		listaPanel.setOnItemLongClickListener(clickSource);
 		listTarget.setOnItemClickListener(targetClickListener);
+		listTarget.setOnItemLongClickListener(targetLongClickListener);
+		
 		listaPanel.setOnDragListener(myDragEventListener);
         targetLayout.setOnDragListener(myDragEventListener);
 		
 		return view;
 	}
 	
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		if(item.getItemId() == R.id.menu_cambiar_fecha)
+		{
+			DatePickerDialog dialog = createDialogWithoutDateField(cambioFecha);					
+			dialog.setTitle("Visualizar para el mes");
+			dialog.show();
+		}
+		
+		return super.onOptionsItemSelected(item);
+	}
+
+
+	private OnItemLongClickListener targetLongClickListener = new OnItemLongClickListener() {
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+				int postionTarget, long arg3) {
+			posicionSeleccionadoTarget = postionTarget;			
+			PanelSeleccionadoTarget = listaCargadaTarget.get(postionTarget);
+			return false;
+		}
+	};
+
 	OnItemClickListener targetClickListener = new OnItemClickListener() {
 
 		@Override
@@ -139,12 +177,24 @@ public class Fragment_listado_panel extends Fragment {
 		
 			if(result != null)
 			{			
+				if(listaCargadaTarget.size() > 0)
+				{
+					listaCargadaTarget.clear();
+				}
+				
 				for(VisitaPlaneada pivot : result)
 				{
 					pivot.getPanelEntity().setComodin(pivot.getId().getId());
 					listaCargadaTarget.add(pivot.getPanelEntity());
 				}
 				
+				AdaptadorPanelTarget = new com.hefesoftpharmacy.adaptadores.AdaptadorPanel(activity, listaCargadaTarget);
+				AdaptadorPanelTarget.notifyDataSetChanged();
+				listTarget.setAdapter(AdaptadorPanelTarget);
+			}
+			else
+			{
+				listaCargadaTarget.clear();
 				AdaptadorPanelTarget = new com.hefesoftpharmacy.adaptadores.AdaptadorPanel(activity, listaCargadaTarget);
 				AdaptadorPanelTarget.notifyDataSetChanged();
 				listTarget.setAdapter(AdaptadorPanelTarget);
@@ -190,9 +240,7 @@ public class Fragment_listado_panel extends Fragment {
 				}
 				else if(listaCargada.get(posicionSeleccionadoSource).getContactosOriginal() > 0 )
 				{
-					DatePickerDialog dialog = createDialogWithoutDateField();					
-					dialog.setTitle("Visualizar para el mes");
-					dialog.show();
+					guardarVisita(global_year, global_monthOfYear, global_dayOfMonth);
 				}
 				else 
 				{
@@ -212,8 +260,8 @@ public class Fragment_listado_panel extends Fragment {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		// TODO Auto-generated method stub
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add("Planear");
+		super.onCreateContextMenu(menu, v, menuInfo);		
+		menu.add("Mapa");
 		menu.add("Eliminar");
 	}
 
@@ -222,13 +270,58 @@ public class Fragment_listado_panel extends Fragment {
 		// TODO Auto-generated method stub
 		super.onContextItemSelected(item);
 		
-		if(item.getTitle() == "Planear")
+		if(item.getTitle() == "Mapa")
 		{
+			   String NombreVisitar = "";			   
+			   String Cordenada  = "";
+			   
+			   
+		        if(PanelSeleccionadoTarget.getUnidadVisitaEntity().getMedicosEntity() != null )
+		        {	        	
+		        	com.google.api.services.hefesoftpharmacy.model.Medicos medico = PanelSeleccionadoTarget.getUnidadVisitaEntity().getMedicosEntity();
+		        	try {
+						NombreVisitar = medico.getNombres() + " " + medico.getApellidos();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}		        	
+		        
+		        	
+		        	try {
+						Cordenada = medico.getCordenadas();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        }
+		        
+		        else if(PanelSeleccionadoTarget.getUnidadVisitaEntity().getFactory() != null )
+		        {
+		           	com.google.api.services.hefesoftpharmacy.model.Farmacias farmacia = PanelSeleccionadoTarget.getUnidadVisitaEntity().getFarmaciasEntity();
+		        	try {
+						NombreVisitar = farmacia.getNombre();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}		        
+		        	
+		        	try {
+						Cordenada = farmacia.getCordenadas();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		        }
 			
+			
+			Intent in = new Intent(activity, Mapa.class);
+			in.putExtra("Cordenada", Cordenada);
+			in.putExtra("Marcador", NombreVisitar);
+	    	startActivity(in);
 		}
 		
 		if(item.getTitle() == "Eliminar")
-		{			 
+		{	
 			Eliminar_Visita_Planeada_Async eliminar = new Eliminar_Visita_Planeada_Async(activity, eliminarListener);
 			eliminar.idVisitaPlaneada = PanelSeleccionadoTarget.getComodin();
 			eliminar.execute(this);
@@ -251,7 +344,7 @@ public class Fragment_listado_panel extends Fragment {
 		}
 	};
 	
-	private DatePickerDialog createDialogWithoutDateField(){		
+	private DatePickerDialog createDialogWithoutDateField(OnDateSetListener ExpiryDateSetListener){		
 	    DatePickerDialog dpd = new DatePickerDialog(activity, ExpiryDateSetListener,dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH), dateAndTime.get(Calendar.DAY_OF_MONTH));
 	    try{
 	    Field[] datePickerDialogFields = dpd.getClass().getDeclaredFields();
@@ -276,6 +369,26 @@ public class Fragment_listado_panel extends Fragment {
 	  return dpd;
 	}
 	
+	
+	public OnDateSetListener cambioFecha = new OnDateSetListener() {
+		
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			
+			Listar_Visitas_Planeadas_Async visitasPlaneadas = new Listar_Visitas_Planeadas_Async(activity, visitasPlaneadasCargadas);
+			visitasPlaneadas.year = year;
+			visitasPlaneadas.month = monthOfYear;
+			visitasPlaneadas.day = dayOfMonth;
+			visitasPlaneadas.dependencias = true;
+			visitasPlaneadas.execute(this);
+			
+			global_year = year;
+			global_monthOfYear = monthOfYear;
+			global_dayOfMonth = dayOfMonth;
+		}
+	};
+	
 	 public OnDateSetListener ExpiryDateSetListener = new OnDateSetListener() {
 			
 			@Override
@@ -283,28 +396,11 @@ public class Fragment_listado_panel extends Fragment {
 					int dayOfMonth) {
 				
 			   if(!Guardando)
-			   {
-				   
-				   @SuppressWarnings("deprecation")
-				   Date date = new Date(datePicker.getYear() - 1900, datePicker.getMonth(), datePicker.getDayOfMonth(),0,0,0);
-				   
-				   
-				   Guardando = true;
-					Insertar_Visita_Planeada_Async insertarVisitaPlaneada = new Insertar_Visita_Planeada_Async(activity, visitaInsertada);
-					
-					VisitaPlaneada visita = new VisitaPlaneada();
-					visita.setEmail(GlobalVars.UsuarioEmail);
-					visita.setIdPanel(PanelSeleccionado.getId().getId());
-					Date value = date;
-					DateTime fechaYHora = new DateTime(value);
-					visita.setFechaYHora(fechaYHora);
-					
-					insertarVisitaPlaneada.visita = visita;
-					insertarVisitaPlaneada.execute(activity);
-					showProgress(true, "Guardadndo visita");
+			   {   
 			   }
 			}
-		};
+
+				};
 	
 		
 		
@@ -370,6 +466,102 @@ public class Fragment_listado_panel extends Fragment {
 		}
 	};
 
+	
+	private void guardarVisita(int year,
+			int monthOfYear, int dayOfMonth) {
+		@SuppressWarnings("deprecation")
+		   Date date = new Date(year - 1900, monthOfYear, dayOfMonth,0,0,0);
+		   
+		   String NombreVisitar = "";
+		   String Direccion  = "";
+		   String Cordenada  = "";
+		   int ColorAgenda = Color.YELLOW; 
+		   
+	        if(PanelSeleccionado.getUnidadVisitaEntity().getMedicosEntity() != null )
+	        {
+	        	ColorAgenda = Color.BLUE;
+	        	
+	        	com.google.api.services.hefesoftpharmacy.model.Medicos medico = PanelSeleccionado.getUnidadVisitaEntity().getMedicosEntity();
+	        	try {
+					NombreVisitar = medico.getNombres() + " " + medico.getApellidos();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	        	
+	        	try {
+					Direccion = medico.getDireccion();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        	
+	        	try {
+					Cordenada = medico.getCordenadas();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+	        
+	        else if(PanelSeleccionado.getUnidadVisitaEntity().getFactory() != null )
+	        {
+	        	ColorAgenda = Color.RED;
+	        	
+	        	com.google.api.services.hefesoftpharmacy.model.Farmacias farmacia = PanelSeleccionado.getUnidadVisitaEntity().getFarmaciasEntity();
+	        	try {
+					NombreVisitar = farmacia.getNombre();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	        	try {
+					Direccion = farmacia.getDireccion();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        	
+	        	try {
+					Cordenada = farmacia.getCordenadas();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+		   
+		   
+		   
+			
+			long idGeneradoCalendario = CalendarsHandler.addEvent(year,
+					monthOfYear+1,
+					dayOfMonth,0,"Visita planeada a " + NombreVisitar ,
+					"Se a planeado una visita a " + NombreVisitar,
+					"Hefesoft Pharmacy", 
+					Direccion ,ColorAgenda);
+			
+			CalendarsHandler.showCalendar(idGeneradoCalendario);
+		   
+		   
+		    Guardando = true;
+			Insertar_Visita_Planeada_Async insertarVisitaPlaneada = new Insertar_Visita_Planeada_Async(activity, visitaInsertada);
+			
+			VisitaPlaneada visita = new VisitaPlaneada();
+			visita.setEmail(GlobalVars.UsuarioEmail);
+			visita.setIdPanel(PanelSeleccionado.getId().getId());
+			visita.setIdGeneradoCalendario(idGeneradoCalendario);
+			visita.setCordenadas(Cordenada);
+			
+			Date value = date;
+			DateTime fechaYHora = new DateTime(value);
+			visita.setFechaYHora(fechaYHora);
+			
+			insertarVisitaPlaneada.visita = visita;
+			insertarVisitaPlaneada.execute(activity);
+			showProgress(true, "Guardadndo visita");
+	}
+
+	
 
 		// Metodo que muestra la animacion del cargador
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
