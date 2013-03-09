@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/Wl-dQcQHCloPEKGC25t8JPGShro\"",
+ "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/IKTDWj6DlOdoDOPgP6jTuy2GNr0\"",
  "discoveryVersion": "v1",
  "id": "hefesoftpharmacy:v1",
  "name": "hefesoftpharmacy",
@@ -2546,6 +2546,36 @@
    "parameters": {
     "cursor": {
      "type": "string"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32"
+    }
+   },
+   "returns": {
+    "$ref": "CollectionResponse_VisitaRealizada"
+   }
+  },
+  "hefesoftpharmacy.visitas.realizada.listarByDate": {
+   "id": "hefesoftpharmacy.visitas.realizada.listarByDate",
+   "parameters": {
+    "Day": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "Month": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "Year": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "cursor": {
+     "type": "string"
+    },
+    "dependencias": {
+     "type": "boolean"
     },
     "limit": {
      "type": "integer",

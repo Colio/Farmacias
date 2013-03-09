@@ -707,6 +707,21 @@ public class Hefesoftrest {
 		com.fachada.visita.CrudVisita crud = new CrudVisita();
 		return crud.listVisitaRealizada(cursorString, limit);
 	}
+	
+	@SuppressWarnings("deprecation")
+	@ApiMethod(name = "visitas.realizada.listarByDate")
+	public CollectionResponse<VisitaRealizada> obtenerVisitaRealizadaByDate(
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("limit") Integer limit,
+			@Nullable @Named("dependencias") Boolean dependencias,
+			@Nullable @Named("Year") int year,
+			@Nullable @Named("Month") int month,
+			@Nullable @Named("Day") int day
+			) {
+
+				com.fachada.visita.CrudVisita crud = new CrudVisita();
+				return crud.listVisitaRealizadaByDate(cursorString, limit, dependencias, new Date(year-1900,month,day,05,00));		
+			}
 
 	
 	@ApiMethod(name = "visitas.realizada.obtenerPorId")

@@ -12,7 +12,7 @@
 /*
  * This file was generated.
  *  with google-apis-code-generator 1.2.0 (build: 2013-03-04 17:44:07 UTC)
- *  on 2013-03-07 at 21:44:38 UTC 
+ *  on 2013-03-09 at 22:43:42 UTC 
  */
 
 package com.google.api.services.hefesoftpharmacy;
@@ -9787,6 +9787,165 @@ public class Hefesoftpharmacy extends AbstractGoogleJsonClient {
 
         public Listar setLimit(Integer limit) {
           this.limit = limit;
+          return this;
+        }
+
+      }
+      /**
+       * Create a request for the method "realizada.listarByDate".
+       *
+       * This request holds the parameters needed by the the hefesoftpharmacy server.  After setting any
+       * optional parameters, call the {@link ListarByDate#execute()} method to invoke the remote
+       * operation.
+       *
+       * @return the request
+       */
+      public ListarByDate listarByDate() throws java.io.IOException {
+        ListarByDate result = new ListarByDate();
+        initialize(result);
+        return result;
+      }
+
+      public class ListarByDate extends HefesoftpharmacyRequest<com.google.api.services.hefesoftpharmacy.model.CollectionResponseVisitaRealizada> {
+
+        private static final String REST_PATH = "obtenerVisitaRealizadaByDate";
+
+        /**
+         * Create a request for the method "realizada.listarByDate".
+         *
+         * This request holds the parameters needed by the the hefesoftpharmacy server.  After setting any
+         * optional parameters, call the {@link ListarByDate#execute()} method to invoke the remote
+         * operation. <p> {@link ListarByDate#initialize(AbstractGoogleClientRequest)} must be called to
+         * initialize this instance immediately after invoking the constructor. </p>
+         *
+         * @since 1.13
+         */
+        protected ListarByDate() {
+          super(Hefesoftpharmacy.this, "POST", REST_PATH, null, com.google.api.services.hefesoftpharmacy.model.CollectionResponseVisitaRealizada.class);
+        }
+
+        @Override
+        public ListarByDate setAlt(String alt) {
+          return (ListarByDate) super.setAlt(alt);
+        }
+
+        @Override
+        public ListarByDate setFields(String fields) {
+          return (ListarByDate) super.setFields(fields);
+        }
+
+        @Override
+        public ListarByDate setKey(String key) {
+          return (ListarByDate) super.setKey(key);
+        }
+
+        @Override
+        public ListarByDate setOauthToken(String oauthToken) {
+          return (ListarByDate) super.setOauthToken(oauthToken);
+        }
+
+        @Override
+        public ListarByDate setPrettyPrint(Boolean prettyPrint) {
+          return (ListarByDate) super.setPrettyPrint(prettyPrint);
+        }
+
+        @Override
+        public ListarByDate setQuotaUser(String quotaUser) {
+          return (ListarByDate) super.setQuotaUser(quotaUser);
+        }
+
+        @Override
+        public ListarByDate setUserIp(String userIp) {
+          return (ListarByDate) super.setUserIp(userIp);
+        }
+
+        @com.google.api.client.util.Key("Month")
+        private Integer month;
+
+        /**
+
+         */
+        public Integer getMonth() {
+          return month;
+        }
+
+        public ListarByDate setMonth(Integer month) {
+          this.month = month;
+          return this;
+        }
+
+        @com.google.api.client.util.Key
+        private String cursor;
+
+        /**
+
+         */
+        public String getCursor() {
+          return cursor;
+        }
+
+        public ListarByDate setCursor(String cursor) {
+          this.cursor = cursor;
+          return this;
+        }
+
+        @com.google.api.client.util.Key
+        private Integer limit;
+
+        /**
+
+         */
+        public Integer getLimit() {
+          return limit;
+        }
+
+        public ListarByDate setLimit(Integer limit) {
+          this.limit = limit;
+          return this;
+        }
+
+        @com.google.api.client.util.Key("Year")
+        private Integer year;
+
+        /**
+
+         */
+        public Integer getYear() {
+          return year;
+        }
+
+        public ListarByDate setYear(Integer year) {
+          this.year = year;
+          return this;
+        }
+
+        @com.google.api.client.util.Key("Day")
+        private Integer day;
+
+        /**
+
+         */
+        public Integer getDay() {
+          return day;
+        }
+
+        public ListarByDate setDay(Integer day) {
+          this.day = day;
+          return this;
+        }
+
+        @com.google.api.client.util.Key
+        private Boolean dependencias;
+
+        /**
+
+         */
+        public Boolean getDependencias() {
+          return dependencias;
+        }
+
+        public ListarByDate setDependencias(Boolean dependencias) {
+          this.dependencias = dependencias;
           return this;
         }
 

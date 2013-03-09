@@ -124,15 +124,6 @@ public class CrudVisita {
 		try {		
 			mgr.makePersistent(visitaplaneada);
 			
-			try {
-				Panel panel = mgr.getObjectById(Panel.class, visitaplaneada.getPanel().getId());
-				panel.setContactosActual(panel.getContactosActual() + 1);
-				mgr.makePersistent(panel);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		} finally {
 			mgr.close();
 		}
@@ -157,16 +148,6 @@ public class CrudVisita {
 		try {
 			visitaplaneada = mgr.getObjectById(VisitaPlaneada.class, id);
 			mgr.deletePersistent(visitaplaneada);
-			
-			try {
-				Panel panel = mgr.getObjectById(Panel.class, visitaplaneada.getPanel().getId());
-				panel.setContactosActual(panel.getContactosActual() - 1);
-				mgr.makePersistent(panel);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		} finally {
 			mgr.close();
 		}
@@ -212,6 +193,55 @@ public class CrudVisita {
 		return CollectionResponse.<VisitaRealizada> builder().setItems(execute)
 				.setNextPageToken(cursorString).build();
 	}
+	
+	public CollectionResponse<VisitaRealizada> listVisitaRealizadaByDate(
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("limit") Integer limit,
+			@Nullable @Named("dependencias") Boolean dependencias,
+			@Nullable @Named("Date") Date date
+			
+			) {
+
+		PersistenceManager mgr = null;
+		Cursor cursor = null;
+		List<VisitaRealizada> execute = null;
+
+		try {
+			mgr = getPersistenceManager();
+			Query query = mgr.newQuery(VisitaRealizada.class);
+			query.setFilter("FechaYHora == dateParam");
+			query.declareParameters("java.util.Date dateParam");
+			
+			if (cursorString != null && cursorString != "") {
+				cursor = Cursor.fromWebSafeString(cursorString);
+				HashMap<String, Object> extensionMap = new HashMap<String, Object>();
+				extensionMap.put(JDOCursorHelper.CURSOR_EXTENSION, cursor);
+				query.setExtensions(extensionMap);
+			}
+
+			if (limit != null) {
+				query.setRange(0, limit);
+			}
+
+			execute = (List<VisitaRealizada>) query.execute(date);
+			cursor = JDOCursorHelper.getCursor(execute);
+			if (cursor != null)
+				cursorString = cursor.toWebSafeString();
+
+			// Tight loop for fetching all entities from datastore and accomodate
+			// for lazy fetch.
+			for (VisitaRealizada obj : execute)
+			{
+				obj.cargarDatos(dependencias, obj.getPanel().getId());
+			}
+		} finally {
+			mgr.close();
+		}
+
+		return CollectionResponse.<VisitaRealizada> builder().setItems(execute)
+				.setNextPageToken(cursorString).build();
+	}
+	
 
 	
 	public VisitaRealizada getVisitaRealizada(@Named("id") Long id) {
@@ -219,6 +249,17 @@ public class CrudVisita {
 		VisitaRealizada visitarealizada = null;
 		try {
 			visitarealizada = mgr.getObjectById(VisitaRealizada.class, id);
+			
+			
+			try {
+				Panel panel = mgr.getObjectById(Panel.class, visitarealizada.getPanel().getId());
+				panel.setContactosActual(panel.getContactosActual() + 1);
+				mgr.makePersistent(panel);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} finally {
 			mgr.close();
 		}
@@ -256,10 +297,18 @@ public class CrudVisita {
 		VisitaRealizada visitarealizada = null;
 		try {
 			visitarealizada = mgr.getObjectById(VisitaRealizada.class, id);
-			
-			
-			
 			mgr.deletePersistent(visitarealizada);
+			
+			try {
+				Panel panel = mgr.getObjectById(Panel.class, visitarealizada.getPanel().getId());
+				panel.setContactosActual(panel.getContactosActual() - 1);
+				mgr.makePersistent(panel);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		} finally {
 			mgr.close();
 		}

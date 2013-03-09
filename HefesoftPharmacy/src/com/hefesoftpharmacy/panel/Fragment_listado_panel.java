@@ -7,6 +7,8 @@ import java.util.List;
 
 import java.lang.reflect.Field;
 import org.json.JSONException;
+
+import android.R.menu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -23,6 +25,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
@@ -86,10 +89,12 @@ public class Fragment_listado_panel extends Fragment {
 		
 		//Evento de drag and drop
         myDragEventListener = new MyDragEventListener(drag);
+        
+        activity = getActivity();
 		
 		if(listaCargada.size() == 0)
 		{
-			activity = getActivity();
+			
 			listaPanel = (ListView)view.findViewById(R.id.list_seleccion);
 			listTarget = (ListView)view.findViewById(R.id.list_seleccion_drop);
 			
@@ -104,6 +109,8 @@ public class Fragment_listado_panel extends Fragment {
 			global_year = dateAndTime.get(Calendar.YEAR);
 			global_monthOfYear = dateAndTime.get(Calendar.MONTH);
 			global_dayOfMonth = dateAndTime.get(Calendar.DAY_OF_MONTH);
+			
+			mostrarTitulo();
 			
 			visitasPlaneadas.year = dateAndTime.get(Calendar.YEAR);
 			visitasPlaneadas.month = dateAndTime.get(Calendar.MONTH);
@@ -131,6 +138,12 @@ public class Fragment_listado_panel extends Fragment {
         targetLayout.setOnDragListener(myDragEventListener);
 		
 		return view;
+	}
+
+
+
+	private void mostrarTitulo() {
+		activity.setTitle("Planeacion para " + global_dayOfMonth + " " + (global_monthOfYear +1)  + " " + global_year);
 	}
 	
 	
@@ -386,6 +399,8 @@ public class Fragment_listado_panel extends Fragment {
 			global_year = year;
 			global_monthOfYear = monthOfYear;
 			global_dayOfMonth = dayOfMonth;
+			
+			mostrarTitulo();
 		}
 	};
 	

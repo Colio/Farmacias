@@ -26,7 +26,7 @@ public class VisitaRealizada {
 	 @NotPersistent
 	 private long idPanel;
 	 
-	 @Persistent
+	 @NotPersistent
 	 private com.fachada.panel.Panel PanelEntity;
 	 
 	 
@@ -58,6 +58,13 @@ public class VisitaRealizada {
 	public void setFechaYHora(Date fechaYHora) {
 		FechaYHora = fechaYHora;
 	}
+	
+	public void cargarDatos(Boolean TodosDatos, long idPanel) {
+		
+		CrudPanel crud = new CrudPanel();			
+		PanelEntity = crud.getPanel(idPanel,TodosDatos);
+	
+}
 
 	public Key getId() {
 		return Id;
