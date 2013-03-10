@@ -33,45 +33,96 @@ public class Adaptador_Menu_Parametrizacion extends ArrayAdapter {
         View  item = inflater.inflate(R.layout.template_menu, null);
  
 
-
-        if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 1)
+        if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).Tipo == "Parametrizacion")
         {
-	        TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
-	    	lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
-	       	
-	    	ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
-	    	imagen.setImageResource(R.drawable.image_medic);
+        	construirMenuParametrizacion(position, item);
         }
-        
-        else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 2)
+        else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).Tipo == "Panel")
         {
-	        TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
-	    	lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
-	       	
-	    	ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
-	    	imagen.setImageResource(R.drawable.ic_launcher);
-        }
-        
-        else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 3)
-        {
-	        TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
-	    	lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
-	       	
-	    	ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
-	    	imagen.setImageResource(R.drawable.ic_launcher);
-        }
-        
-        else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 4)
-        {
-	        TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
-	    	lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
-	       	
-	    	ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
-	    	imagen.setPadding(8, 0, 0, 0);
-	    	imagen.setImageResource(R.drawable.ic_launcher);
+        	construirMenuPanel(position, item);
         }
         
         return(item);
     }
+
+		private void construirMenuParametrizacion(int position, View item) {
+			if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 1)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.image_medic);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 2)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 3)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 4)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setPadding(8, 0, 0, 0);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+		}
+
+		private void construirMenuPanel(int position, View item) {
+			if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 1)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.image_medic);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 2)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 3)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+			
+			else if(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getId() == 4)
+			{
+			    TextView lblTitulo = (TextView)item.findViewById(R.id.template_menu_nombre);
+				lblTitulo.setText(((com.hefesoftpharmacy.menu.Menu) datos.toArray()[position]).getNombre());    	
+			   	
+				ImageView imagen = (ImageView)item.findViewById(R.id.image_Menu);
+				imagen.setPadding(8, 0, 0, 0);
+				imagen.setImageResource(R.drawable.ic_launcher);
+			}
+		}
+
+
 }
 

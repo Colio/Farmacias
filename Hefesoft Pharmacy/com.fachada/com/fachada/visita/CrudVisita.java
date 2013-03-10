@@ -250,16 +250,6 @@ public class CrudVisita {
 		try {
 			visitarealizada = mgr.getObjectById(VisitaRealizada.class, id);
 			
-			
-			try {
-				Panel panel = mgr.getObjectById(Panel.class, visitarealizada.getPanel().getId());
-				panel.setContactosActual(panel.getContactosActual() + 1);
-				mgr.makePersistent(panel);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		} finally {
 			mgr.close();
 		}
@@ -272,7 +262,27 @@ public class CrudVisita {
 		try {			
 			mgr.makePersistent(visitarealizada);
 			
+			try {
+				Panel panel = mgr.getObjectById(Panel.class, visitarealizada.getPanel().getId());
+				panel.setContactosActual(panel.getContactosActual() + 1);
+				mgr.makePersistent(panel);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
+			try {
+				
+				if(visitarealizada.getIdVisitaPlaneada() != -1)
+				{				
+					VisitaPlaneada visitaPlaneada = mgr.getObjectById(VisitaPlaneada.class, visitarealizada.getIdVisitaPlaneada());
+					visitaPlaneada.setRealizada(true);
+					mgr.makePersistent(visitaPlaneada);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} finally {
 			mgr.close();

@@ -23,12 +23,13 @@ public class Menu {
 		Imagen = imagen;
 		Orden = orden;
 	}
-	public Menu(String nombre, String imagen, String orden, int id) {
+	public Menu(String nombre, String imagen, String orden, int id, String tipo) {
 		super();
 		Nombre = nombre;
 		Imagen = imagen;
 		Orden = orden;
 		this.id = id;
+		this.Tipo = tipo;
 	}
 	public void setOrden(String orden) {
 		Orden = orden;
@@ -36,7 +37,16 @@ public class Menu {
 	public String Nombre;
 	public String Imagen;
 	public String Orden;
+	public String Tipo;
 	
+	
+	
+	public String getTipo() {
+		return Tipo;
+	}
+	public void setTipo(String tipo) {
+		Tipo = tipo;
+	}
 	public int getId() {
 		return id;
 	}

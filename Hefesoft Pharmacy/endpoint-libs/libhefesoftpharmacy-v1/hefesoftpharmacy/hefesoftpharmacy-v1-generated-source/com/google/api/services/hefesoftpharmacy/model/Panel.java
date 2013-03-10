@@ -88,6 +88,12 @@ public final class Panel extends GenericJson {
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
+  private Boolean comodin2;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
   private Integer contactosActual;
 
   /**
@@ -289,6 +295,23 @@ public final class Panel extends GenericJson {
    */
   public Panel setComodin(Long comodin) {
     this.comodin = comodin;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Boolean getComodin2() {
+    return comodin2;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public Panel setComodin2(Boolean comodin2) {
+    this.comodin2 = comodin2;
     return this;
   }
 

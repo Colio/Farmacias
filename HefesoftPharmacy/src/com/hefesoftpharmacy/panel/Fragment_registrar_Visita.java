@@ -42,19 +42,21 @@ import android.widget.Toast;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.hefesoftpharmacy.model.Panel;
 import com.google.api.services.hefesoftpharmacy.model.VisitaPlaneada;
+import com.google.api.services.hefesoftpharmacy.model.VisitaRealizada;
 import com.hefesoft.pharmacy.localizacion.Mapa;
 import com.hefesoftpharmacy.GlobalVars;
 import com.hefesoftpharmacy.R;
 import com.hefesoftpharmacy.AsyncTask.AsyncTaskCompleteListener;
 import com.hefesoftpharmacy.AsyncTask.Eliminar_Visita_Planeada_Async;
 import com.hefesoftpharmacy.AsyncTask.Insertar_Visita_Planeada_Async;
+import com.hefesoftpharmacy.AsyncTask.Insertar_Visita_Realizada_Async;
 import com.hefesoftpharmacy.AsyncTask.Listar_Panel_Async;
 import com.hefesoftpharmacy.AsyncTask.Listar_Visitas_Planeadas_Async;
 import com.hefesoftpharmacy.interaction.Interface_Interacion;
 import com.hefesoftpharmacy.interaction.MyDragEventListener;
 import com.hefesoftpharmacy.util.CalendarsHandler;
 
-public class Fragment_listado_panel extends Fragment {
+public class Fragment_registrar_Visita extends Fragment {
 
 	LinearLayout targetLayout;
 	Calendar dateAndTime=Calendar.getInstance();
@@ -94,20 +96,21 @@ public class Fragment_listado_panel extends Fragment {
 		
 		if(listaCargada.size() == 0)
 		{
+			
 			listaPanel = (ListView)view.findViewById(R.id.list_seleccion);
 			listTarget = (ListView)view.findViewById(R.id.list_seleccion_drop);
 			
 			mLoginFormView = view.findViewById(R.id.contenedor_list_seleccion);
 			mLoginStatusView = view.findViewById(R.id.progressanimator_container);
 			
-			registerForContextMenu(listTarget);
-			
-			mostrarTitulo();
-			
+			mostrarTitulo();	
 		}
 		
-		
 		cargueInicial();
+		
+		showProgress(true, "Cargando paneles");
+		registerForContextMenu(listTarget);
+		listaPanel.setVisibility(View.GONE);
 		
 		 final String SOURCELIST_TAG = "listSource";
 	     final String TARGETLIST_TAG = "listTarget";
@@ -143,14 +146,12 @@ public class Fragment_listado_panel extends Fragment {
 		visitasPlaneadas.day = dateAndTime.get(Calendar.DAY_OF_MONTH);
 		visitasPlaneadas.dependencias = true;
 		visitasPlaneadas.execute(this);
-		
-		showProgress(true, "Cargando paneles");
 	}
 
 
 
 	private void mostrarTitulo() {
-		activity.setTitle("Planeacion para " + global_dayOfMonth + " " + (global_monthOfYear +1)  + " " + global_year);
+		activity.setTitle("Registro para " + global_dayOfMonth + " " + (global_monthOfYear +1)  + " " + global_year);
 	}
 	
 	
@@ -162,8 +163,6 @@ public class Fragment_listado_panel extends Fragment {
 		{
 			DatePickerDialog dialog = createDialogWithoutDateField(cambioFecha);					
 			dialog.setTitle("Visualizar para el mes");
-			dateAndTime.add(Calendar.DATE, 1);  
-			dialog.getDatePicker().setMinDate(dateAndTime.getTimeInMillis());
 			dialog.show();
 		}
 		
@@ -283,6 +282,20 @@ public class Fragment_listado_panel extends Fragment {
 		}
 	};
 	
+	AsyncTaskCompleteListener<VisitaRealizada> insertarVisitaCompleto = new  AsyncTaskCompleteListener<VisitaRealizada>() {
+		
+		@Override
+		public void onTaskComplete(VisitaRealizada result) {
+			
+			AdaptadorPanelTarget = new com.hefesoftpharmacy.adaptadores.AdaptadorPanel(activity, listaCargadaTarget);
+			AdaptadorPanelTarget.notifyDataSetChanged();
+			listTarget.setAdapter(AdaptadorPanelTarget);
+			
+			showProgress(false, "Cargando");
+			
+		}
+	};
+	
 	
 	private void quitarContacto() {
 		listaCargada.get(posicionSeleccionadoSource).setContactosOriginal(listaCargada.get(posicionSeleccionadoSource).getContactosOriginal() -1);
@@ -295,9 +308,9 @@ public class Fragment_listado_panel extends Fragment {
 		// TODO Auto-generated method stub
 		
 		menu.clear();
-				
+		
+		menu.add("Visitar");
 		menu.add("Mapa");
-		menu.add("Eliminar");
 		
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
@@ -312,23 +325,36 @@ public class Fragment_listado_panel extends Fragment {
 			   mostrarMapa();
 		}
 		
-		if(item.getTitle() == "Eliminar")
+		if(item.getTitle() == "Visitar")
 		{	
-			
 			if(!PanelSeleccionadoTarget.getComodin2())
-			{			
-				Eliminar_Visita_Planeada_Async eliminar = new Eliminar_Visita_Planeada_Async(activity, eliminarListener);
-				eliminar.idVisitaPlaneada = PanelSeleccionadoTarget.getComodin();
-				eliminar.execute(this);
+			{
+				Insertar_Visita_Realizada_Async visitaRealizada = new Insertar_Visita_Realizada_Async(activity, insertarVisitaCompleto);
+				VisitaRealizada visitaRealizadaGuardar = new VisitaRealizada();
 				
-				listaCargadaTarget.remove(posicionSeleccionadoTarget);
-				AdaptadorPanelTarget = new com.hefesoftpharmacy.adaptadores.AdaptadorPanel(activity, listaCargadaTarget);
-				AdaptadorPanelTarget.notifyDataSetChanged();
-				listTarget.setAdapter(AdaptadorPanelTarget);
+				@SuppressWarnings("deprecation")
+				Date date = new Date(global_year - 1900, global_monthOfYear, global_dayOfMonth,0,0,0);
+				
+				PanelSeleccionadoTarget.setComodin2(true);
+				
+				Date value = date;
+				DateTime fechaYHora = new DateTime(value);			
+				visitaRealizadaGuardar.setFechaYHora(fechaYHora);
+				visitaRealizadaGuardar.setRealizada(true);
+				visitaRealizadaGuardar.setIdVisitaPlaneada(PanelSeleccionadoTarget.getComodin());
+				visitaRealizadaGuardar.setIdPanel(PanelSeleccionadoTarget.getId().getId());
+				visitaRealizada.visita = visitaRealizadaGuardar;
+				visitaRealizada.execute(this);
+				
+				
+				listaCargadaTarget.get(posicionSeleccionadoTarget).setComodin2(true);
+				
+				showProgress(true, "Registrando visita");
+				
 			}
 			else
 			{
-				Toast.makeText(activity, "La visita que desea eliminar ya fue realizada", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Visita registrada", Toast.LENGTH_SHORT).show();
 			}
 		}
 	
@@ -659,6 +685,7 @@ public class Fragment_listado_panel extends Fragment {
 
 
 		public void recargarFragmento() {
+
 			mostrarTitulo();
 			cargueInicial();
 		}

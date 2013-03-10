@@ -86,6 +86,12 @@ public final class VisitaPlaneada extends GenericJson {
   private Panel panelEntity;
 
   /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private Boolean realizada;
+
+  /**
 
    * The value returned may be {@code null}.
    */
@@ -218,6 +224,23 @@ public final class VisitaPlaneada extends GenericJson {
    */
   public VisitaPlaneada setPanelEntity(Panel panelEntity) {
     this.panelEntity = panelEntity;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Boolean getRealizada() {
+    return realizada;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public VisitaPlaneada setRealizada(Boolean realizada) {
+    this.realizada = realizada;
     return this;
   }
 

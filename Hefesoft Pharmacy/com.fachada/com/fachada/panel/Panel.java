@@ -68,6 +68,9 @@ public class Panel {
 	 private long Comodin = -1;
 	 
 	 @NotPersistent
+	 private Boolean Comodin2 = false;
+	 
+	 @NotPersistent
 	 private com.fachada.usuario.Usuario UsuarioEntity;
 	 
 	 public void setIdUsuario(long idUsuario) {
@@ -248,6 +251,14 @@ public class Panel {
 
 	public void setComodin(long comodin) {
 		Comodin = comodin;
+	}
+
+	public Boolean getComodin2() {
+		return Comodin2;
+	}
+
+	public void setComodin2(Boolean comodin2) {
+		Comodin2 = comodin2;
 	}	
 	
 	

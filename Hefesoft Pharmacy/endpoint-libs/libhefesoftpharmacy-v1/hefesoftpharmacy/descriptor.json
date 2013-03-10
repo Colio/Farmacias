@@ -1,11 +1,11 @@
 {
   "files": [
     {
-      "path": "pharmacyhefesoft-hefesoftpharmacy-v1-20130309224342-java-1.13.2-beta-sources.jar", 
+      "path": "pharmacyhefesoft-hefesoftpharmacy-v1-20130310163505-java-1.13.2-beta-sources.jar", 
       "type": "source"
     }, 
     {
-      "path": "pharmacyhefesoft-hefesoftpharmacy-v1-20130309224342-java-1.13.2-beta.jar.properties", 
+      "path": "pharmacyhefesoft-hefesoftpharmacy-v1-20130310163505-java-1.13.2-beta.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -690,7 +690,7 @@
     }
   ], 
   "language_version": "1.13.2-beta", 
-  "revision": 20130309224342, 
+  "revision": 20130310163505, 
   "id": "hefesoftpharmacy:v1", 
   "name": "hefesoftpharmacy"
 }

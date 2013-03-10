@@ -3,6 +3,7 @@ package com.hefesoftpharmacy.adaptadores;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.google.api.services.hefesoftpharmacy.Hefesoftpharmacy.Medicos;
 import com.google.api.services.hefesoftpharmacy.model.Panel;
 import com.hefesoftpharmacy.R;
+import com.hefesoftpharmacy.R.color;
 import com.hefesoftpharmacy.util.ImageLoader;
 
 public class AdaptadorPanel extends ArrayAdapter<Object> 
@@ -73,6 +75,11 @@ public class AdaptadorPanel extends ArrayAdapter<Object>
         	int loader = R.drawable.ic_launcher;
             ImageLoader imgLoader = new ImageLoader(context.getApplicationContext());
             imgLoader.DisplayImage(farmacias.getImagen(), loader, Imagen);
+        }
+        
+        if(panel.getComodin2())
+        {
+        	item.setBackgroundColor(Color.GRAY);
         }
         
         return(item);

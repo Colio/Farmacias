@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import com.hefesoftpharmacy.R;
 import com.hefesoftpharmacy.adaptadores.Adaptador_Menu_Parametrizacion;
 
-public class Menu_Fragment_parametrizacion extends Fragment
+public class Menu_Fragment_panel extends Fragment
 {
 
 	View view;
@@ -55,28 +55,9 @@ public class Menu_Fragment_parametrizacion extends Fragment
 			
 			if(ElementoSeleccionado.id == 1)
 			{
-				((MenuParametrizacion)getActivity()).closeMenu();
-				((MenuParametrizacion)getActivity()).gotoMedicos();
-			}
-			
-			else if(ElementoSeleccionado.id == 2)
-			{
-				((MenuParametrizacion)getActivity()).closeMenu();
-				((MenuParametrizacion)getActivity()).gotoIngresos();
-			}
-			
-			else if(ElementoSeleccionado.id == 3)
-			{
-				((MenuParametrizacion)getActivity()).closeMenu();
-				((MenuParametrizacion)getActivity()).gotoMap();
-			}
-			
-			else if(ElementoSeleccionado.id == 4)
-			{
-				((MenuParametrizacion)getActivity()).closeMenu();
-				((MenuParametrizacion)getActivity()).gotoGraficas();
-			}
-			
+				((MenuPanel)getActivity()).closeMenu();
+				((MenuPanel)getActivity()).gotoPlaneacion();
+			}		
 		}
 	};
 	
@@ -84,7 +65,7 @@ public class Menu_Fragment_parametrizacion extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		lstMenu.add(new com.hefesoftpharmacy.menu.Menu("Medicos", "Medicos", "1",1, "Parametrizacion"));
+		lstMenu.add(new com.hefesoftpharmacy.menu.Menu("Planeacion y registro", "Planeacion y registro", "1",1, "Panel"));
 	}	
 	
 	

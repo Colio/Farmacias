@@ -35,6 +35,8 @@ public class VisitaPlaneada {
 	 private String Email;
 	 
 	 private Long idGeneradoCalendario;
+	 
+	 private Boolean Realizada = false;
 	
 	public void cargarDatos(Boolean TodosDatos, long idPanel) {
 		
@@ -104,4 +106,14 @@ public class VisitaPlaneada {
 	public void setPanelEntity(com.fachada.panel.Panel panelEntity) {
 		PanelEntity = panelEntity;
 	}
+
+	public Boolean getRealizada() {
+		return Realizada;
+	}
+
+	public void setRealizada(Boolean realizada) {
+		Realizada = realizada;
+	}
+	
+	
 }

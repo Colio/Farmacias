@@ -29,10 +29,22 @@ public class VisitaRealizada {
 	 @NotPersistent
 	 private com.fachada.panel.Panel PanelEntity;
 	 
-	 
 	 private Date FechaYHora;
 	 
 	 private String Email;
+	 
+	 private Boolean Realizada = false;
+	 
+	 private long idVisitaPlaneada = -1;
+	 
+
+	public Boolean getRealizada() {
+		return Realizada;
+	}
+
+	public void setRealizada(Boolean realizada) {
+		Realizada = realizada;
+	}
 
 	public com.fachada.panel.Panel getPanelEntity(Boolean TodosDatos) {
 		
@@ -88,6 +100,22 @@ public class VisitaRealizada {
 
 	public void setEmail(String email) {
 		Email = email;
+	}
+
+	public com.fachada.panel.Panel getPanelEntity() {
+		return PanelEntity;
+	}
+
+	public void setPanelEntity(com.fachada.panel.Panel panelEntity) {
+		PanelEntity = panelEntity;
+	}
+
+	public long getIdVisitaPlaneada() {
+		return idVisitaPlaneada;
+	}
+
+	public void setIdVisitaPlaneada(long idVisitaPlaneada) {
+		this.idVisitaPlaneada = idVisitaPlaneada;
 	}
 	
 	

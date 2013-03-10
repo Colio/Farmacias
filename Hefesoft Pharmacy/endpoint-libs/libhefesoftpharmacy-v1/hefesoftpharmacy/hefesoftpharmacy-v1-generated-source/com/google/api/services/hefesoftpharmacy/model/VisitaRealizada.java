@@ -64,8 +64,26 @@ public final class VisitaRealizada extends GenericJson {
   /**
    * The value may be {@code null}.
    */
+  @com.google.api.client.util.Key @JsonString
+  private Long idVisitaPlaneada;
+
+  /**
+   * The value may be {@code null}.
+   */
   @com.google.api.client.util.Key
   private Key panel;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private Panel panelEntity;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private Boolean realizada;
 
   /**
 
@@ -139,6 +157,23 @@ public final class VisitaRealizada extends GenericJson {
 
    * The value returned may be {@code null}.
    */
+  public Long getIdVisitaPlaneada() {
+    return idVisitaPlaneada;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public VisitaRealizada setIdVisitaPlaneada(Long idVisitaPlaneada) {
+    this.idVisitaPlaneada = idVisitaPlaneada;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
   public Key getPanel() {
     return panel;
   }
@@ -149,6 +184,40 @@ public final class VisitaRealizada extends GenericJson {
    */
   public VisitaRealizada setPanel(Key panel) {
     this.panel = panel;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Panel getPanelEntity() {
+    return panelEntity;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public VisitaRealizada setPanelEntity(Panel panelEntity) {
+    this.panelEntity = panelEntity;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Boolean getRealizada() {
+    return realizada;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public VisitaRealizada setRealizada(Boolean realizada) {
+    this.realizada = realizada;
     return this;
   }
 

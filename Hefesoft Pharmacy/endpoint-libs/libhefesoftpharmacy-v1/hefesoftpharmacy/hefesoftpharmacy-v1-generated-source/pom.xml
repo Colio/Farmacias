@@ -8,8 +8,8 @@
 
   <groupId>com.google.apis</groupId>
   <artifactId>google-api-services-hefesoftpharmacy</artifactId>
-  <version>v1-rev20130309224342-1.13.2-beta</version>
-  <name> v1 (revision 20130309224342)</name>
+  <version>v1-rev20130310163505-1.13.2-beta</version>
+  <name> v1 (revision 20130310163505)</name>
   <packaging>jar</packaging>
 
   <inceptionYear>2011</inceptionYear>

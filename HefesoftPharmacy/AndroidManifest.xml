@@ -66,18 +66,23 @@
             android:label="Menu" >
         </activity>
         <activity
+            android:name="com.hefesoftpharmacy.menu.MenuPanel"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:label="Menu Panel" >
+        </activity>
+        <activity
             android:name="com.hefesoftpharmacy.splash.Splash"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_splash"
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.hefesoftpharmacy.panel.PlanearVisita"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
             android:label="@string/title_activity_planear_visita" >
         </activity>
     </application>

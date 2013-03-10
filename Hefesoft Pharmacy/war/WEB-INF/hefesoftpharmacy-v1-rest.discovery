@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/IKTDWj6DlOdoDOPgP6jTuy2GNr0\"",
+ "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/OVbwWxzJUSD0JZfgaWwffQMY0SE\"",
  "discoveryVersion": "v1",
  "id": "hefesoftpharmacy:v1",
  "name": "hefesoftpharmacy",
@@ -678,6 +678,9 @@
      "type": "string",
      "format": "int64"
     },
+    "comodin2": {
+     "type": "boolean"
+    },
     "contactosActual": {
      "type": "integer",
      "format": "int32"
@@ -924,6 +927,9 @@
     },
     "panelEntity": {
      "$ref": "Panel"
+    },
+    "realizada": {
+     "type": "boolean"
     }
    }
   },
@@ -945,8 +951,18 @@
      "type": "string",
      "format": "int64"
     },
+    "idVisitaPlaneada": {
+     "type": "string",
+     "format": "int64"
+    },
     "panel": {
      "$ref": "Key"
+    },
+    "panelEntity": {
+     "$ref": "Panel"
+    },
+    "realizada": {
+     "type": "boolean"
     }
    }
   }
