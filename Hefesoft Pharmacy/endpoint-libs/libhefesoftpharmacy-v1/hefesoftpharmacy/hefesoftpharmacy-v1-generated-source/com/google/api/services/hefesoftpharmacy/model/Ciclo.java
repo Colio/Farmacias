@@ -40,6 +40,12 @@ public final class Ciclo extends GenericJson {
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
+  private Boolean activo;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
   private Integer diasHabiles;
 
   /**
@@ -95,6 +101,23 @@ public final class Ciclo extends GenericJson {
    */
   @com.google.api.client.util.Key
   private Integer plazoReportarVisita;
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Boolean getActivo() {
+    return activo;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public Ciclo setActivo(Boolean activo) {
+    this.activo = activo;
+    return this;
+  }
 
   /**
 

@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/ihrtNV41C23Qi3fMFRL5eMBOWN8\"",
+ "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/9PHkThmuepA3Ty8Sqbn-Uz8I734\"",
  "discoveryVersion": "v1",
  "id": "hefesoftpharmacy:v1",
  "name": "hefesoftpharmacy",
@@ -105,6 +105,9 @@
    "id": "Ciclo",
    "type": "object",
    "properties": {
+    "activo": {
+     "type": "boolean"
+    },
     "diasHabiles": {
      "type": "integer",
      "format": "int32"
@@ -1114,6 +1117,14 @@
      "httpMethod": "GET",
      "response": {
       "$ref": "CicloCollection"
+     }
+    },
+    "obtenerCicloActivo": {
+     "id": "hefesoftpharmacy.ciclo.obtenerCicloActivo",
+     "path": "obtenerCicloActivo",
+     "httpMethod": "POST",
+     "response": {
+      "$ref": "Ciclo"
      }
     },
     "obtenerCicloPorId": {

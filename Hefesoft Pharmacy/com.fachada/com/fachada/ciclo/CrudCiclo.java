@@ -1,6 +1,7 @@
 package com.fachada.ciclo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Named;
@@ -50,6 +51,42 @@ public class CrudCiclo {
 	}
 
 	
+	@SuppressWarnings("unchecked")
+	public Ciclo obtenerCicloActivo() {
+		PersistenceManager mgr = getPersistenceManager();
+		Ciclo ciclo = null;
+
+		Query query = mgr.newQuery(Ciclo.class);
+
+		query.setFilter("Activo == ActivoParam");
+
+		//query.setOrdering("UsuarioKey desc");
+		query.declareParameters("Boolean ActivoParam");
+
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		//params.put( "UsuarioKey", panel.getUsuarioKey() );
+		params.put( "ActivoParam", true);
+
+
+		try {				
+			try {
+				for (Object obj : (List<Object>) query.executeWithMap(params))
+				{
+					ciclo = (((Ciclo) obj));
+					break;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ciclo = null;
+		}
+		return ciclo;
+	}
+	
 	public Ciclo updateCiclo(Ciclo ciclo) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
@@ -58,22 +95,8 @@ public class CrudCiclo {
 			
 			if(!(ciclo.getIdEntidad() != -1))
 			{
-				cicloActualizar.setIdEntidad(ciclo.getIdEntidad());
-			}
-			
-			if(!(ciclo.getFechaInicial() != null))
-			{
-				cicloActualizar.setFechaInicial(ciclo.getFechaInicial());
-			}
-			
-			if(!(ciclo.getFechaReunionCiclo() != null))
-			{
-				cicloActualizar.setFechaReunionCiclo(ciclo.getFechaReunionCiclo());
-			}
-			
-			if(!ciclo.getNombre().isEmpty())
-			{
-				cicloActualizar.setNombre(ciclo.getNombre());
+				cicloActualizar.setIdEntidad(ciclo.getIdEntidad());				
+				cicloActualizar = ciclo;
 			}
 			
 			mgr.makePersistent(cicloActualizar);

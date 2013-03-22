@@ -3,10 +3,12 @@ package com.fachada.ciclo;
 import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.fachada.util.DateHelperByInt;
 import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
@@ -45,6 +47,12 @@ public class Ciclo {
 	
 	@Persistent
 	private Boolean Activo;
+	
+	@NotPersistent
+	private DateHelperByInt FechaInicialInt;
+	
+	@NotPersistent
+	private DateHelperByInt FechaReunionInt;
 
 	public Key getId() {
 		return Id;

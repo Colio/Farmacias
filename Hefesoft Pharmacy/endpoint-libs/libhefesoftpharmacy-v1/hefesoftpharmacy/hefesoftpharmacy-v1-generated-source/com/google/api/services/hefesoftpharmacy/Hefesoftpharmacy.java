@@ -11,8 +11,8 @@
  */
 /*
  * This file was generated.
- *  with google-apis-code-generator 1.2.0 (build: 2013-03-04 17:44:07 UTC)
- *  on 2013-03-16 at 18:08:00 UTC 
+ *  with google-apis-code-generator 1.3.0 (build: 2013-03-20 15:12:36 UTC)
+ *  on 2013-03-22 at 22:32:38 UTC 
  */
 
 package com.google.api.services.hefesoftpharmacy;
@@ -1028,6 +1028,75 @@ public class Hefesoftpharmacy extends AbstractGoogleJsonClient {
       @Override
       public ListarCiclos setUserIp(String userIp) {
         return (ListarCiclos) super.setUserIp(userIp);
+      }
+
+    }
+    /**
+     * Create a request for the method "ciclo.obtenerCicloActivo".
+     *
+     * This request holds the parameters needed by the the hefesoftpharmacy server.  After setting any
+     * optional parameters, call the {@link ObtenerCicloActivo#execute()} method to invoke the remote
+     * operation.
+     *
+     * @return the request
+     */
+    public ObtenerCicloActivo obtenerCicloActivo() throws java.io.IOException {
+      ObtenerCicloActivo result = new ObtenerCicloActivo();
+      initialize(result);
+      return result;
+    }
+
+    public class ObtenerCicloActivo extends HefesoftpharmacyRequest<com.google.api.services.hefesoftpharmacy.model.Ciclo> {
+
+      private static final String REST_PATH = "obtenerCicloActivo";
+
+      /**
+       * Create a request for the method "ciclo.obtenerCicloActivo".
+       *
+       * This request holds the parameters needed by the the hefesoftpharmacy server.  After setting any
+       * optional parameters, call the {@link ObtenerCicloActivo#execute()} method to invoke the remote
+       * operation. <p> {@link ObtenerCicloActivo#initialize(AbstractGoogleClientRequest)} must be
+       * called to initialize this instance immediately after invoking the constructor. </p>
+       *
+       * @since 1.13
+       */
+      protected ObtenerCicloActivo() {
+        super(Hefesoftpharmacy.this, "POST", REST_PATH, null, com.google.api.services.hefesoftpharmacy.model.Ciclo.class);
+      }
+
+      @Override
+      public ObtenerCicloActivo setAlt(String alt) {
+        return (ObtenerCicloActivo) super.setAlt(alt);
+      }
+
+      @Override
+      public ObtenerCicloActivo setFields(String fields) {
+        return (ObtenerCicloActivo) super.setFields(fields);
+      }
+
+      @Override
+      public ObtenerCicloActivo setKey(String key) {
+        return (ObtenerCicloActivo) super.setKey(key);
+      }
+
+      @Override
+      public ObtenerCicloActivo setOauthToken(String oauthToken) {
+        return (ObtenerCicloActivo) super.setOauthToken(oauthToken);
+      }
+
+      @Override
+      public ObtenerCicloActivo setPrettyPrint(Boolean prettyPrint) {
+        return (ObtenerCicloActivo) super.setPrettyPrint(prettyPrint);
+      }
+
+      @Override
+      public ObtenerCicloActivo setQuotaUser(String quotaUser) {
+        return (ObtenerCicloActivo) super.setQuotaUser(quotaUser);
+      }
+
+      @Override
+      public ObtenerCicloActivo setUserIp(String userIp) {
+        return (ObtenerCicloActivo) super.setUserIp(userIp);
       }
 
     }

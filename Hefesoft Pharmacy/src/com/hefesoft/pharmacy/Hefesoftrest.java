@@ -194,6 +194,12 @@ public class Hefesoftrest {
 		return crudCiclo.removeCiclo(id);
 	}	
 	
+	@ApiMethod(name = "ciclo.obtenerCicloActivo")
+	public Ciclo obtenerCicloActivo() {
+		CrudCiclo crudCiclo = new CrudCiclo();
+		return crudCiclo.obtenerCicloActivo();
+	}
+	
 	@ApiMethod(name = "farmacias.listarFarmacias")
 	public List<Farmacias> listFarmacias() {
 		CrudFarmacias crudFarmacias = new CrudFarmacias();
