@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/OVbwWxzJUSD0JZfgaWwffQMY0SE\"",
+ "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/ihrtNV41C23Qi3fMFRL5eMBOWN8\"",
  "discoveryVersion": "v1",
  "id": "hefesoftpharmacy:v1",
  "name": "hefesoftpharmacy",
@@ -121,6 +121,10 @@
     },
     "id": {
      "$ref": "Key"
+    },
+    "idEntidad": {
+     "type": "integer",
+     "format": "int32"
     },
     "idUPES": {
      "type": "string"

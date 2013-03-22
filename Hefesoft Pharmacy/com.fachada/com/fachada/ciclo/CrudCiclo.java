@@ -53,7 +53,30 @@ public class CrudCiclo {
 	public Ciclo updateCiclo(Ciclo ciclo) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			mgr.makePersistent(ciclo);
+			
+			Ciclo cicloActualizar = mgr.getObjectById(Ciclo.class, ciclo.getIdEntidad());
+			
+			if(!(ciclo.getIdEntidad() != -1))
+			{
+				cicloActualizar.setIdEntidad(ciclo.getIdEntidad());
+			}
+			
+			if(!(ciclo.getFechaInicial() != null))
+			{
+				cicloActualizar.setFechaInicial(ciclo.getFechaInicial());
+			}
+			
+			if(!(ciclo.getFechaReunionCiclo() != null))
+			{
+				cicloActualizar.setFechaReunionCiclo(ciclo.getFechaReunionCiclo());
+			}
+			
+			if(!ciclo.getNombre().isEmpty())
+			{
+				cicloActualizar.setNombre(ciclo.getNombre());
+			}
+			
+			mgr.makePersistent(cicloActualizar);
 		} finally {
 			mgr.close();
 		}

@@ -70,6 +70,12 @@ public final class Ciclo extends GenericJson {
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
+  private Integer idEntidad;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
   private String idUPES;
 
   /**
@@ -172,6 +178,23 @@ public final class Ciclo extends GenericJson {
    */
   public Ciclo setId(Key id) {
     this.id = id;
+    return this;
+  }
+
+  /**
+
+   * The value returned may be {@code null}.
+   */
+  public Integer getIdEntidad() {
+    return idEntidad;
+  }
+
+  /**
+
+   * The value set may be {@code null}.
+   */
+  public Ciclo setIdEntidad(Integer idEntidad) {
+    this.idEntidad = idEntidad;
     return this;
   }
 

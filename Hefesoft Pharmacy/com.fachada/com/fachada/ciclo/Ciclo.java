@@ -39,6 +39,12 @@ public class Ciclo {
 	
 	@Persistent
 	private int PlazoRegistrarPedido;
+	
+	@Persistent
+	private int IdEntidad;
+	
+	@Persistent
+	private Boolean Activo;
 
 	public Key getId() {
 		return Id;
@@ -110,5 +116,21 @@ public class Ciclo {
 
 	public void setPlazoRegistrarPedido(int plazoRegistrarPedido) {
 		PlazoRegistrarPedido = plazoRegistrarPedido;
+	}
+
+	public int getIdEntidad() {
+		return IdEntidad;
+	}
+
+	public void setIdEntidad(int idEntidad) {
+		IdEntidad = idEntidad;
+	}
+
+	public Boolean getActivo() {
+		return Activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		Activo = activo;
 	}
 }
