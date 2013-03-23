@@ -1,6 +1,7 @@
 package com.fachada.ciclo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,16 +91,42 @@ public class CrudCiclo {
 	public Ciclo updateCiclo(Ciclo ciclo) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			
+						
 			Ciclo cicloActualizar = mgr.getObjectById(Ciclo.class, ciclo.getIdEntidad());
-			
+
 			if(!(ciclo.getIdEntidad() != -1))
 			{
-				cicloActualizar.setIdEntidad(ciclo.getIdEntidad());				
-				cicloActualizar = ciclo;
+				cicloActualizar.setIdEntidad(ciclo.getIdEntidad());
+			}
+
+			if(!(ciclo.getFechaInicial() != null))
+			{
+				cicloActualizar.setFechaInicial(ciclo.getFechaInicial());
+			}
+
+			if(!(ciclo.getFechaReunionCiclo() != null))
+			{
+				cicloActualizar.setFechaReunionCiclo(ciclo.getFechaReunionCiclo());
+			}
+
+			if(!ciclo.getNombre().isEmpty())
+			{
+				cicloActualizar.setNombre(ciclo.getNombre());
+			}
+			
+			
+			try {
+				cicloActualizar .setFechaInicial(new Date(ciclo.getFechaInicialInt().getYear()-1900,
+						ciclo.getFechaInicialInt().getMonth(),
+						ciclo.getFechaInicialInt().getDay(),
+						05,00));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 			mgr.makePersistent(cicloActualizar);
+			
 		} finally {
 			mgr.close();
 		}

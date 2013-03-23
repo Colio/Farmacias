@@ -49,7 +49,7 @@ public class Ciclo {
 	private Boolean Activo;
 	
 	@NotPersistent
-	private DateHelperByInt FechaInicialInt;
+	private DateHelperByInt FechaInicialInt = new DateHelperByInt();
 	
 	@NotPersistent
 	private DateHelperByInt FechaReunionInt;
@@ -141,4 +141,21 @@ public class Ciclo {
 	public void setActivo(Boolean activo) {
 		Activo = activo;
 	}
+
+	public DateHelperByInt getFechaInicialInt() {
+		return FechaInicialInt;
+	}
+
+	public void setFechaInicialInt(DateHelperByInt fechaInicialInt) {
+		FechaInicialInt = fechaInicialInt;
+	}
+
+	public DateHelperByInt getFechaReunionInt() {
+		return FechaReunionInt;
+	}
+
+	public void setFechaReunionInt(DateHelperByInt fechaReunionInt) {
+		FechaReunionInt = fechaReunionInt;
+	}
+	
 }

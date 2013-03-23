@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/9PHkThmuepA3Ty8Sqbn-Uz8I734\"",
+ "etag": "\"2MERlHgXUfSlVQnFAL3vX-58eZg/GgM2KXV30V6WRwrQL6q-coUAsCw\"",
  "discoveryVersion": "v1",
  "id": "hefesoftpharmacy:v1",
  "name": "hefesoftpharmacy",
@@ -120,9 +120,15 @@
      "type": "string",
      "format": "date-time"
     },
+    "fechaInicialInt": {
+     "$ref": "DateHelperByInt"
+    },
     "fechaReunionCiclo": {
      "type": "string",
      "format": "date-time"
+    },
+    "fechaReunionInt": {
+     "$ref": "DateHelperByInt"
     },
     "id": {
      "$ref": "Key"
@@ -381,6 +387,24 @@
     },
     "nextPageToken": {
      "type": "string"
+    }
+   }
+  },
+  "DateHelperByInt": {
+   "id": "DateHelperByInt",
+   "type": "object",
+   "properties": {
+    "day": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "month": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "year": {
+     "type": "integer",
+     "format": "int32"
     }
    }
   },
